@@ -1,0 +1,137 @@
+@startuml
+set namespaceSeparator ::
+class "flutter::src::widgets::framework.dart::StatefulWidget" #Green
+class "flutter::src::widgets::framework.dart::State<StatefulWidget>" #MediumSpringGreen
+class "flutter::src::widgets::framework.dart::GlobalKey<FormState>" #DarkRed
+class "flutter::src::widgets::framework.dart::State<T>" #SteelBlue
+class "flutter::src::widgets::framework.dart::StatelessWidget" #Tomato
+
+class "Locato::MainClasses.dart::Event" #DeepSkyBlue{
+  +int id
+  +String name
+  +DateTime beginTime
+  +DateTime endTime
+  +String cycle
+  +String color
+  +String description
+  +List<Notifi> listNotifi
+}
+
+class "Locato::MainClasses.dart::Group" {
+  +int id
+  +String name
+  +int howMuchDone
+  +bool isSelected
+}
+
+class "Locato::MainClasses.dart::Localization" #YellowGreen{
+  +int id
+  +double latitude
+  +double longitude
+  +String name
+  +String city
+  +String street
+  +bool isNearBy
+  +bool wasNotified
+  +bool isSelected
+}
+
+class "Locato::MainClasses.dart::Notifi" {
+  +int id
+  +int idTask
+  +int idEvent
+  +Duration duration
+}
+
+class "Locato::MainClasses.dart::Task" {
+  +int id
+  +String name
+  +bool done
+  +DateTime endTime
+  +String description
+  +Localization localization
+  +Group group
+  +List<Notifi> listNotifi
+}
+
+"Locato::MainClasses.dart::Task" o-up[#YellowGreen]- "Locato::MainClasses.dart::Localization"
+"Locato::MainClasses.dart::Task" o-up- "Locato::MainClasses.dart::Group"
+
+
+
+
+class "Locato::Pages::GroupPage.dart::GroupCard" {
+  +Group group
+  +_GroupCardState createState()
+}
+
+"Locato::Pages::GroupPage.dart::GroupCard" o-- "Locato::MainClasses.dart::Group"
+"flutter::src::widgets::framework.dart::StatefulWidget" <|-[#Green]- "Locato::Pages::GroupPage.dart::GroupCard"
+
+class "Locato::Pages::GroupPage.dart::_GroupCardState" {
+  -List<Task> _list
+  +int doneTasks
+  +void initState()
+  +Widget build()
+  -Widget _buildContent()
+}
+
+"flutter::src::widgets::framework.dart::State<T>" <|-[#SteelBlue]- "Locato::Pages::GroupPage.dart::_GroupCardState"
+
+class "Locato::Pages::GroupPage.dart::GroupCardHeader" {
+  +double procent
+  +Group group
+  +int length
+  +int howMuchDone
+  +Widget build()
+}
+
+"Locato::Pages::GroupPage.dart::GroupCardHeader" o-- "Locato::MainClasses.dart::Group"
+"flutter::src::widgets::framework.dart::StatelessWidget" <|-[#Tomato]- "Locato::Pages::GroupPage.dart::GroupCardHeader"
+
+class "Locato::Pages::GroupPage.dart::GroupCardItem" {
+  +Function onPressedDone
+  +Function onPressedEdit
+  +Function onPressedDelete
+  +String name
+  +bool done
+  +Localization localization
+  +String date
+  +String description
+  +Widget build()
+}
+
+"Locato::Pages::GroupPage.dart::GroupCardItem" o-[#YellowGreen]- "Locato::MainClasses.dart::Localization"
+"flutter::src::widgets::framework.dart::StatelessWidget" <|-[#Tomato]- "Locato::Pages::GroupPage.dart::GroupCardItem"
+
+class "Locato::Pages::GroupPage.dart::GroupCardTasks" {
+  +List<Task> tasks
+  +_GroupCardTasksState createState()
+}
+
+"flutter::src::widgets::framework.dart::StatefulWidget" <|-[#Green]- "Locato::Pages::GroupPage.dart::GroupCardTasks"
+
+class "Locato::Pages::GroupPage.dart::_GroupCardTasksState" {
+  +Widget build()
+}
+
+"flutter::src::widgets::framework.dart::State<T>" <|-[#SteelBlue]- "Locato::Pages::GroupPage.dart::_GroupCardTasksState"
+
+class "Locato::Pages::GroupPage.dart::GroupTaskPage" {
+  +_GroupTaskPageState createState()
+}
+
+"flutter::src::widgets::framework.dart::StatefulWidget" <|-[#Green]- "Locato::Pages::GroupPage.dart::GroupTaskPage"
+
+class "Locato::Pages::GroupPage.dart::_GroupTaskPageState" {
+  +List<Group> listOfGroup
+  +void initState()
+  -void _downloadData()
+  +Widget build()
+}
+
+"flutter::src::widgets::framework.dart::State<T>" <|-[#SteelBlue]- "Locato::Pages::GroupPage.dart::_GroupTaskPageState"
+
+
+
+@enduml

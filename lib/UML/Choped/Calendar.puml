@@ -1,0 +1,34 @@
+@startuml
+set namespaceSeparator ::
+class "flutter::src::widgets::framework.dart::StatefulWidget" #Green
+class "flutter::src::widgets::framework.dart::State<StatefulWidget>" #MediumSpringGreen
+class "flutter::src::widgets::framework.dart::GlobalKey<FormState>" #DarkRed
+class "flutter::src::widgets::framework.dart::State<T>" #SteelBlue
+class "flutter::src::widgets::framework.dart::StatelessWidget" #Tomato
+
+
+class "Locato::Pages::Calendar.dart::Calendar" {
+  +_CalendarState createState()
+}
+
+"flutter::src::widgets::framework.dart::StatefulWidget" <|-up[#Green]- "Locato::Pages::Calendar.dart::Calendar"
+
+class "Locato::Pages::Calendar.dart::_CalendarState" {
+  -List _selectedEvents
+  -Map<DateTime, List<Event>> _events
+  -List<Event> _downloadEvents
+  -CalendarController _calendarController
+  -DateTime _selectedDay
+  +void initState()
+  +void dispose()
+  -void _onDaySelected()
+  +Widget build()
+  -Widget _buildTableCalendar()
+  -Widget _buildEventsMarker()
+  -Widget _buildEventList()
+}
+
+"Locato::Pages::Calendar.dart::_CalendarState" o-- "table_calendar::table_calendar.dart::CalendarController"
+"flutter::src::widgets::framework.dart::State<T>" <|-up[#SteelBlue]- "Locato::Pages::Calendar.dart::_CalendarState"
+
+@enduml

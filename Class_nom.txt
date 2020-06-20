@@ -1,0 +1,877 @@
+[<abstract>NotificationHelperBackground
+  |
+  <static>-_flutterLocalNotificationsPlugin: FlutterLocalNotificationsPlugin;
+  <static>+initSettingsAndroid: AndroidInitializationSettings;
+  <static>+initSettingsIOS: IOSInitializationSettings;
+  <static>+initSettings: InitializationSettings;
+  <static>+androidPlatformChannelSpecifics: AndroidNotificationDetails;
+  <static>+iOSChannelSpecifics: IOSNotificationDetails;
+  <static>+platformChannelSpecifics: NotificationDetails;
+  +flutterLocalNotificationsPlugin: FlutterLocalNotificationsPlugin
+  |
+  <static>+dynamic init();
+  <static>-Future _onSelectNotification();
+  <static>+Future add();
+  <static>+Future now();
+  <static>+void ListOfTaskNotifi();
+  <static>+void ListOfEventNotifi();
+  <static>+Future deleteTask();
+  <static>+Future deleteEvent();
+  <static>+Future deleteNotifi();
+  <static>+Future deleteListNotifi()
+]
+
+[<abstract>NotificationHelperBackground]o-[FlutterLocalNotificationsPlugin]
+[<abstract>NotificationHelperBackground]o-[AndroidInitializationSettings]
+[<abstract>NotificationHelperBackground]o-[IOSInitializationSettings]
+[<abstract>NotificationHelperBackground]o-[InitializationSettings]
+[<abstract>NotificationHelperBackground]o-[AndroidNotificationDetails]
+[<abstract>NotificationHelperBackground]o-[IOSNotificationDetails]
+[<abstract>NotificationHelperBackground]o-[NotificationDetails]
+
+[DatabaseHelper
+  |
+  <static>-_databaseName: String;
+  <static>-_databaseVersion: int;
+  <static>+index: int;
+  <static>+instance: DatabaseHelper;
+  <static>-_database: Database;
+  +database: Future<Database>
+  |
+  -dynamic _initDatabase();
+  -Future _onCreate();
+  +Future insert();
+  +Future queryAllRows();
+  +Future queryIdRowsTask();
+  +Future queryEventWeekend();
+  +Future queryEventDay();
+  +Future queryTaskNotifiId();
+  +Future showalltables();
+  +Future query();
+  +Future update();
+  +Future delete()
+]
+
+[DatabaseHelper]o-[DatabaseHelper]
+[DatabaseHelper]o-[<abstract>Database]
+
+[EventHelper
+  |
+  <static>+dbHelper: DatabaseHelper
+  |
+  <static>+Future add();
+  <static>+Future update();
+  <static>+Future delete();
+  <static>+Future lists();
+  <static>+Future listsDay()
+]
+
+[EventHelper]o-[DatabaseHelper]
+
+[GroupHelper
+  |
+  <static>+dbHelper: DatabaseHelper
+  |
+  <static>+Future add();
+  <static>+Future addlist();
+  <static>+Future update();
+  <static>+Future delete();
+  <static>+Future deleteAndReplaceIdTask();
+  <static>+Future getPercent();
+  <static>+Future lists()
+]
+
+[GroupHelper]o-[DatabaseHelper]
+
+[LocalizationHelper
+  |
+  <static>+dbHelper: DatabaseHelper
+  |
+  <static>+Future add();
+  <static>+Future addlist();
+  <static>+Future updateStatus();
+  <static>+Future update();
+  <static>+Future delete();
+  <static>+Future deleteAndReplaceIdTask();
+  <static>+Future lists();
+  <static>+Future resetAllStatus()
+]
+
+[LocalizationHelper]o-[DatabaseHelper]
+
+[NotifiHelper
+  |
+  <static>+dbHelper: DatabaseHelper
+  |
+  <static>+Future add();
+  <static>+Future addListNotifiTask();
+  <static>+Future addListNotifiEvent();
+  <static>+Future update();
+  <static>+Future delete();
+  <static>+Future deleteTask();
+  <static>+Future deleteTaskID();
+  <static>+Future deleteEventID();
+  <static>+Future lists();
+  <static>+Future listsTaskID();
+  <static>+Future listsEventID();
+  <static>-Duration _parseDuration()
+]
+
+[NotifiHelper]o-[DatabaseHelper]
+
+[TaskHelper
+  |
+  <static>+dbHelper: DatabaseHelper
+  |
+  <static>+Future add();
+  <static>+Future updateDone();
+  <static>+Future update();
+  <static>+Future delete();
+  <static>+Future deleteDoneTaskToday();
+  <static>+Future lists();
+  <static>+Future listsID();
+  <static>+Future listsIDLocal()
+]
+
+[TaskHelper]o-[DatabaseHelper]
+
+[MyApp
+  |
+  +Widget build()
+]
+
+[<abstract>StatelessWidget]<:-[MyApp]
+
+[HomePage
+  |
+  +_HomePageState createState()
+]
+
+[<abstract>StatefulWidget]<:-[HomePage]
+
+[_HomePageState
+  |
+  -_tabController: TabController;
+  -_pageController: PageController;
+  +pageCanChange: bool
+  |
+  +void initState();
+  +Widget build();
+  +dynamic onPageChange()
+]
+
+[_HomePageState]o-[TabController]
+[_HomePageState]o-[PageController]
+[<abstract>State<T>]<:-[_HomePageState]
+[<abstract>SingleTickerProviderStateMixin<T>]<:-[_HomePageState]
+
+[Event
+  |
+  +id: int;
+  +name: String;
+  +beginTime: DateTime;
+  +endTime: DateTime;
+  +cycle: String;
+  +color: String;
+  +description: String;
+  +listNotifi: List<Notifi>
+]
+
+[Group
+  |
+  +id: int;
+  +name: String;
+  +howMuchDone: int;
+  +isSelected: bool
+]
+
+[Localization
+  |
+  +id: int;
+  +latitude: double;
+  +longitude: double;
+  +name: String;
+  +city: String;
+  +street: String;
+  +isNearBy: bool;
+  +wasNotified: bool;
+  +isSelected: bool
+]
+
+[Notifi
+  |
+  +id: int;
+  +idTask: int;
+  +idEvent: int;
+  +duration: Duration
+]
+
+[Task
+  |
+  +id: int;
+  +name: String;
+  +done: bool;
+  +endTime: DateTime;
+  +description: String;
+  +localization: Localization;
+  +group: Group;
+  +listNotifi: List<Notifi>
+]
+
+[Task]o-[Localization]
+[Task]o-[Group]
+
+[AddEvent
+  |
+  +addEventState: State<StatefulWidget>
+  |
+  +AddEventState createState()
+]
+
+[AddEvent]o-[<abstract>State<T>]
+[<abstract>StatefulWidget]<:-[AddEvent]
+
+[AddEventState
+  |
+  -_controllerName: TextEditingController;
+  -_controllerDesc: TextEditingController;
+  -_formKey: GlobalKey<FormState>;
+  -_today: DateTime;
+  -_date: DateTime;
+  -_time1: DateTime;
+  -_time2: DateTime;
+  -_dateColor: Color;
+  -_time1Color: Color;
+  -_time2Color: Color;
+  -_event: Event;
+  +isDateSelected: bool;
+  +isTime1Selected: bool;
+  +isTime2Selected: bool
+  |
+  +void initState();
+  +Widget build();
+  +Widget buildCustomTextFieldwithValidation();
+  +Widget buildCustomTextField();
+  +Widget buildSpace();
+  +Widget buildCustomButtonWithValidation();
+  +Widget buildCustomButton();
+  +Widget buildButtonBar();
+  +Widget buildButtonBarTile();
+  +Widget buildClearButton();
+  +void clearDate();
+  +void clearTime1();
+  +void clearTime2();
+  +void clearNotifiList();
+  +void datePick();
+  +void startTimePick();
+  +void endTimePick();
+  +void goBack();
+  +void goToNotificationPickPage();
+  +void acceptAndValidate()
+]
+
+[AddEventState]o-[TextEditingController]
+[AddEventState]o-[<abstract>GlobalKey<T>]
+[AddEventState]o-[Color]
+[AddEventState]o-[Event]
+[<abstract>State<T>]<:-[AddEventState]
+
+[AddGroup
+  |
+  +task: Task;
+  +listOfGroup: List<Group>;
+  +stateOfParent: State<StatefulWidget>
+  |
+  +_AddGroupState createState()
+]
+
+[AddGroup]o-[Task]
+[AddGroup]o-[<abstract>State<T>]
+[<abstract>StatefulWidget]<:-[AddGroup]
+
+[_AddGroupState
+  |
+  -_formKey: GlobalKey<FormState>;
+  -_text: TextEditingController;
+  +downloadlist: List<Group>;
+  +list: List<Group>
+  |
+  +void initState();
+  -void _downloadData();
+  +Widget build();
+  +Widget buildListTileWithText();
+  +Widget buildCustomTextFieldwithValidation();
+  +Widget buildRemoveButton();
+  +Widget buildCustomButton();
+  +Widget buildSpace();
+  +void goBack();
+  +void add();
+  +void removeFromList();
+  +void select()
+]
+
+[_AddGroupState]o-[<abstract>GlobalKey<T>]
+[_AddGroupState]o-[TextEditingController]
+[<abstract>State<T>]<:-[_AddGroupState]
+
+[AddLocalization
+  |
+  +task: Task;
+  +stateOfParent: State<StatefulWidget>;
+  +addLocalizationState: State<StatefulWidget>;
+  +listOfLocal: List<Localization>
+  |
+  +_AddLocalizationState createState()
+]
+
+[AddLocalization]o-[Task]
+[AddLocalization]o-[<abstract>State<T>]
+[<abstract>StatefulWidget]<:-[AddLocalization]
+
+[_AddLocalizationState
+  |
+  +localizationlist: List<Localization>;
+  +downloadlist: List<Localization>
+  |
+  +void initState();
+  -void _downloadData();
+  +Widget build();
+  +Widget buildList();
+  +Widget buildRemoveButton();
+  +Widget buildCustomButton();
+  +Widget buildSpace();
+  +void goBack();
+  +void goToLocationPickPage();
+  +void removeFromList();
+  +void checkifselected()
+]
+
+[<abstract>State<T>]<:-[_AddLocalizationState]
+
+[Adres
+  |
+  +ulica: String;
+  +numerDomu: String;
+  +miasto: String;
+  +odleglosc: int
+  |
+  +String toString()
+]
+
+[AddLocation
+  |
+  +listofLocal: List<Localization>;
+  +stateOfParent: State<StatefulWidget>
+  |
+  +_AddLocationState createState()
+]
+
+[AddLocation]o-[<abstract>State<T>]
+[<abstract>StatefulWidget]<:-[AddLocation]
+
+[_AddLocationState
+  |
+  +mapController: Completer<GoogleMapController>;
+  +futureAdresy: Future<List<Adres>>;
+  +adresController: TextEditingController;
+  +nazwaController: TextEditingController;
+  +thrTxt: Throttling;
+  <static>-_initialPosition: LatLng;
+  <static>-_lastPosition: LatLng;
+  +dbLokalizacja: Localization;
+  -_formKey: GlobalKey<FormState>
+  |
+  -dynamic _onMapCreated();
+  -dynamic _onCameraMove();
+  +void initState();
+  -InputDecoration _buildInputDecoration();
+  -InputDecoration _buildInputDecoration2();
+  -void _getLocation();
+  +void locationToAddress();
+  +Future addressToLocation();
+  +Widget build();
+  -Widget _buildNazwaLokalizacji();
+  -Widget _buildAdres();
+  -Widget _buildMapa();
+  -Widget _buildDodaj()
+]
+
+[_AddLocationState]o-[<abstract>Completer<T>]
+[_AddLocationState]o-[TextEditingController]
+[_AddLocationState]o-[Throttling]
+[_AddLocationState]o-[LatLng]
+[_AddLocationState]o-[Localization]
+[_AddLocationState]o-[<abstract>GlobalKey<T>]
+[<abstract>State<T>]<:-[_AddLocationState]
+
+[AddNotificationTask
+  |
+  +task: Task;
+  +stateOfParent: State<StatefulWidget>
+  |
+  +_AddNotificationTaskState createState()
+]
+
+[AddNotificationTask]o-[Task]
+[AddNotificationTask]o-[<abstract>State<T>]
+[<abstract>StatefulWidget]<:-[AddNotificationTask]
+
+[_AddNotificationTaskState
+  |
+  -_text: TextEditingController;
+  -_formKey: GlobalKey<FormState>;
+  -_notifilist: List<Notifi>;
+  +duration: dynamic;
+  +minuty: int;
+  +godziny: int;
+  +dni: int;
+  +name: String
+  |
+  +void initState();
+  +Widget build();
+  +Widget buildPickerNameTile();
+  +Widget buildNumberPicker1();
+  +Widget buildNumberPicker2();
+  +Widget buildNumberPicker3();
+  +Widget buildCustomButton();
+  +Widget buildSpace();
+  +Widget buildCustomTextFieldwithValidation();
+  +void validateAndAdd();
+  +void goBack();
+  +void confirm()
+]
+
+[_AddNotificationTaskState]o-[TextEditingController]
+[_AddNotificationTaskState]o-[<abstract>GlobalKey<T>]
+[<abstract>State<T>]<:-[_AddNotificationTaskState]
+
+[AddNotificationEvent
+  |
+  +event: Event;
+  +stateOfParent: State<StatefulWidget>
+  |
+  +_AddNotificationEventState createState()
+]
+
+[AddNotificationEvent]o-[Event]
+[AddNotificationEvent]o-[<abstract>State<T>]
+[<abstract>StatefulWidget]<:-[AddNotificationEvent]
+
+[_AddNotificationEventState
+  |
+  -_text: TextEditingController;
+  -_formKey: GlobalKey<FormState>;
+  -_notifilist: List<Notifi>;
+  +duration: dynamic;
+  +minuty: int;
+  +godziny: int;
+  +dni: int;
+  +name: String
+  |
+  +void initState();
+  +Widget build();
+  +Widget buildPickerNameTile();
+  +Widget buildNumberPicker1();
+  +Widget buildNumberPicker2();
+  +Widget buildNumberPicker3();
+  +Widget buildCustomButton();
+  +Widget buildSpace();
+  +Widget buildCustomTextFieldwithValidation();
+  +void validateAndAdd();
+  +void goBack();
+  +void confirm()
+]
+
+[_AddNotificationEventState]o-[TextEditingController]
+[_AddNotificationEventState]o-[<abstract>GlobalKey<T>]
+[<abstract>State<T>]<:-[_AddNotificationEventState]
+
+[AddTask
+  |
+  +_AddTaskState createState()
+]
+
+[<abstract>StatefulWidget]<:-[AddTask]
+
+[_AddTaskState
+  |
+  -_formKey: GlobalKey<FormState>;
+  -_controllerName: TextEditingController;
+  +controllerDesc: TextEditingController;
+  +dateColor: Color;
+  +timeColor: Color;
+  +isNotificationEnabled: bool;
+  +isTimeSelected: bool;
+  +isDateSelected: bool;
+  +isLocalizationSelected: bool;
+  -_terminData: DateTime;
+  -_terminCzas: DateTime;
+  -_today: DateTime;
+  -_task: Task;
+  +listOfLocalization: List<Localization>;
+  +listOfGroup: List<Group>
+  |
+  +void initState();
+  +Widget build();
+  +Widget buildButtonBar();
+  +Widget buildCustomTextFieldwithValidation();
+  +Widget buildClearButton();
+  +Widget buildNotifiListClearButton();
+  +Widget buildCustomTextField();
+  +Widget buildSpace();
+  +Widget buildCustomButtonWithValidation();
+  +Widget buildCustomButton();
+  +Widget buildCustomNotificationButton();
+  +Widget buildButtonBarTile();
+  +void clearDate();
+  +void clearTime();
+  +void clearLocalization();
+  +void clearGroup();
+  +void clearNotifiList();
+  +void datePick();
+  +void timePick();
+  +void goBack();
+  +void goToNotificationPickPage();
+  +void goToLocalizationPickPage();
+  +void goToGroupPickPage();
+  +void acceptAndValidate()
+]
+
+[_AddTaskState]o-[<abstract>GlobalKey<T>]
+[_AddTaskState]o-[TextEditingController]
+[_AddTaskState]o-[Color]
+[_AddTaskState]o-[Task]
+[<abstract>State<T>]<:-[_AddTaskState]
+
+[ListNotifi
+  |
+  +lista: List<Notifi>
+  |
+  +_ListNotifiState createState()
+]
+
+[<abstract>StatefulWidget]<:-[ListNotifi]
+
+[_ListNotifiState
+  |
+  +void initState();
+  +Widget build();
+  +Widget buildSpace();
+  +Widget buildSpaceBetween();
+  +Widget buildListTextTile();
+  +Widget buildRemoveButton();
+  +Widget buildListIconTile();
+  +void removeFromList()
+]
+
+[<abstract>State<T>]<:-[_ListNotifiState]
+
+[UpdateEvent
+  |
+  +event: Event;
+  +updateEventState: State<StatefulWidget>
+  |
+  +_UpdateEventState createState()
+]
+
+[UpdateEvent]o-[Event]
+[UpdateEvent]o-[<abstract>State<T>]
+[<abstract>StatefulWidget]<:-[UpdateEvent]
+
+[_UpdateEventState
+  |
+  -_controllerName: TextEditingController;
+  -_controllerDesc: TextEditingController;
+  -_name: String;
+  -_description: String;
+  -_date: String;
+  -_time1: String;
+  -_time2: String;
+  -_notification: String;
+  -_start: DateTime;
+  -_end: DateTime;
+  -_dateColor: Color;
+  -_time1Color: Color;
+  -_time2Color: Color
+  |
+  +void initState();
+  -void _downloadData();
+  +Widget build();
+  +Widget buildCustomTextFieldwithValidation();
+  +Widget buildCustomTextField();
+  +Widget buildSpace();
+  +Widget buildCustomButtonWithValidation();
+  +Widget buildCustomButton();
+  +Widget buildButtonBarTile();
+  +void datePick();
+  +void startTimePick();
+  +void endTimePick();
+  +void goBack();
+  +void goToNotificationPickPage();
+  +void acceptAndValidate()
+]
+
+[_UpdateEventState]o-[TextEditingController]
+[_UpdateEventState]o-[Color]
+[<abstract>State<T>]<:-[_UpdateEventState]
+
+[UpdateTask
+  |
+  +updateTaskState: State<StatefulWidget>;
+  +task: Task
+  |
+  +_UpdateTaskState createState()
+]
+
+[UpdateTask]o-[<abstract>State<T>]
+[UpdateTask]o-[Task]
+[<abstract>StatefulWidget]<:-[UpdateTask]
+
+[_UpdateTaskState
+  |
+  -_formKey: GlobalKey<FormState>;
+  -_controllerName: TextEditingController;
+  +controllerDesc: TextEditingController;
+  +id: int;
+  +dateColor: Color;
+  +timeColor: Color;
+  +isNotificationEnabled: bool;
+  +isTimeSelected: bool;
+  +isDateSelected: bool;
+  +isLocalizationSelected: bool;
+  -_terminData: DateTime;
+  -_terminCzas: DateTime;
+  +listOfLocalization: List<Localization>;
+  +listOfGroup: List<Group>
+  |
+  +void initState();
+  -void _downloadData();
+  +Widget build();
+  +Widget buildCustomTextFieldwithValidation();
+  +Widget buildClearButton();
+  +Widget buildNotifiListClearButton();
+  +Widget buildCustomTextField();
+  +Widget buildSpace();
+  +Widget buildCustomButtonWithValidation();
+  +Widget buildCustomButton();
+  +Widget buildCustomNotificationButton();
+  +Widget buildButtonBarTile();
+  +void clearDate();
+  +void clearTime();
+  +void clearLocalization();
+  +void clearGroup();
+  +void clearNotifiList();
+  +void datePick();
+  +void timePick();
+  +void goBack();
+  +void goToNotificationPickPage();
+  +void goToLocalizationPickPage();
+  +void goToGroupPickPage();
+  +void acceptAndValidate();
+  +void onBackPressed();
+  +void selectedGroup()
+]
+
+[_UpdateTaskState]o-[<abstract>GlobalKey<T>]
+[_UpdateTaskState]o-[TextEditingController]
+[_UpdateTaskState]o-[Color]
+[<abstract>State<T>]<:-[_UpdateTaskState]
+
+[Calendar
+  |
+  +_CalendarState createState()
+]
+
+[<abstract>StatefulWidget]<:-[Calendar]
+
+[_CalendarState
+  |
+  -_selectedEvents: List;
+  -_events: Map<DateTime, List<Event>>;
+  -_downloadEvents: List<Event>;
+  -_calendarController: CalendarController;
+  -_selectedDay: DateTime
+  |
+  +void initState();
+  +void dispose();
+  -void _onDaySelected();
+  +Widget build();
+  -Widget _buildTableCalendar();
+  -Widget _buildEventsMarker();
+  -Widget _buildEventList()
+]
+
+[_CalendarState]o-[CalendarController]
+[<abstract>State<T>]<:-[_CalendarState]
+
+[GroupCard
+  |
+  +group: Group
+  |
+  +_GroupCardState createState()
+]
+
+[GroupCard]o-[Group]
+[<abstract>StatefulWidget]<:-[GroupCard]
+
+[_GroupCardState
+  |
+  -_list: List<Task>;
+  +doneTasks: int
+  |
+  +void initState();
+  +Widget build();
+  -Widget _buildContent()
+]
+
+[<abstract>State<T>]<:-[_GroupCardState]
+
+[GroupCardHeader
+  |
+  +procent: double;
+  +group: Group;
+  +length: int;
+  +howMuchDone: int
+  |
+  +Widget build()
+]
+
+[GroupCardHeader]o-[Group]
+[<abstract>StatelessWidget]<:-[GroupCardHeader]
+
+[GroupCardItem
+  |
+  +onPressedDone: Function;
+  +onPressedEdit: Function;
+  +onPressedDelete: Function;
+  +name: String;
+  +done: bool;
+  +localization: Localization;
+  +date: String;
+  +description: String
+  |
+  +Widget build()
+]
+
+[GroupCardItem]o-[Localization]
+[<abstract>StatelessWidget]<:-[GroupCardItem]
+
+[GroupCardTasks
+  |
+  +tasks: List<Task>
+  |
+  +_GroupCardTasksState createState()
+]
+
+[<abstract>StatefulWidget]<:-[GroupCardTasks]
+
+[_GroupCardTasksState
+  |
+  +Widget build()
+]
+
+[<abstract>State<T>]<:-[_GroupCardTasksState]
+
+[GroupTaskPage
+  |
+  +_GroupTaskPageState createState()
+]
+
+[<abstract>StatefulWidget]<:-[GroupTaskPage]
+
+[_GroupTaskPageState
+  |
+  +listOfGroup: List<Group>
+  |
+  +void initState();
+  -void _downloadData();
+  +Widget build()
+]
+
+[<abstract>State<T>]<:-[_GroupTaskPageState]
+
+[HomePageEvents
+  |
+  +_HomePageEventsState createState()
+]
+
+[<abstract>StatefulWidget]<:-[HomePageEvents]
+
+[_HomePageEventsState
+  |
+  <static>+listOfDays: List<String>;
+  +day: int;
+  +list: List<Event>;
+  +heightExtededAppBar: double;
+  +heightImportantEvent: double;
+  +widthImportantEvent: double;
+  -_date: DateTime
+  |
+  +void initState();
+  +String getDay();
+  +Widget build();
+  +dynamic refresh()
+]
+
+[<abstract>State<T>]<:-[_HomePageEventsState]
+
+[EventCard
+  |
+  +day: String;
+  +events: List<Event>
+  |
+  +Widget build();
+  -Widget _buildContent()
+]
+
+[<abstract>StatelessWidget]<:-[EventCard]
+
+[EventCardEvents
+  |
+  +events: List<Event>
+  |
+  +_EventCardEventsState createState()
+]
+
+[<abstract>StatefulWidget]<:-[EventCardEvents]
+
+[_EventCardEventsState
+  |
+  +Widget build()
+]
+
+[<abstract>State<T>]<:-[_EventCardEventsState]
+
+[EventCardHeader
+  |
+  +day: String
+  |
+  +Widget build()
+]
+
+[<abstract>StatelessWidget]<:-[EventCardHeader]
+
+[EventCardItem
+  |
+  +name: String;
+  +eventStart: String;
+  +eventEnd: String;
+  +cycle: String;
+  +is_cyclic: bool;
+  +description: String;
+  +color: Color;
+  +onPressedEdit: Function;
+  +onPressedDelete: Function
+  |
+  +_EventCardItemState createState()
+]
+
+[EventCardItem]o-[Color]
+[<abstract>StatefulWidget]<:-[EventCardItem]
+
+[_EventCardItemState
+  |
+  +Widget build()
+]
+
+[<abstract>State<T>]<:-[_EventCardItemState]

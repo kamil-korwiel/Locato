@@ -1,0 +1,32 @@
+@startuml
+set namespaceSeparator ::
+abstract class "Locato::Background::NotificationHelperBackground.dart::NotificationHelperBackground" {
+  {static} -FlutterLocalNotificationsPlugin _flutterLocalNotificationsPlugin
+  {static} +AndroidInitializationSettings initSettingsAndroid
+  {static} +IOSInitializationSettings initSettingsIOS
+  {static} +InitializationSettings initSettings
+  {static} +AndroidNotificationDetails androidPlatformChannelSpecifics
+  {static} +IOSNotificationDetails iOSChannelSpecifics
+  {static} +NotificationDetails platformChannelSpecifics
+  +FlutterLocalNotificationsPlugin flutterLocalNotificationsPlugin
+  {static} +dynamic init()
+  {static} -Future _onSelectNotification()
+  {static} +Future add()
+  {static} +Future now()
+  {static} +void ListOfTaskNotifi()
+  {static} +void ListOfEventNotifi()
+  {static} +Future deleteTask()
+  {static} +Future deleteEvent()
+  {static} +Future deleteNotifi()
+  {static} +Future deleteListNotifi()
+}
+
+"Locato::Background::NotificationHelperBackground.dart::NotificationHelperBackground" o-- "flutter_local_notifications::src::flutter_local_notifications_plugin.dart::FlutterLocalNotificationsPlugin"
+"Locato::Background::NotificationHelperBackground.dart::NotificationHelperBackground" o-- "flutter_local_notifications::src::platform_specifics::android::initialization_settings.dart::AndroidInitializationSettings"
+"Locato::Background::NotificationHelperBackground.dart::NotificationHelperBackground" o-- "flutter_local_notifications::src::platform_specifics::ios::initialization_settings.dart::IOSInitializationSettings"
+"Locato::Background::NotificationHelperBackground.dart::NotificationHelperBackground" o-- "flutter_local_notifications::src::initialization_settings.dart::InitializationSettings"
+"Locato::Background::NotificationHelperBackground.dart::NotificationHelperBackground" o-- "flutter_local_notifications::src::platform_specifics::android::notification_details.dart::AndroidNotificationDetails"
+"Locato::Background::NotificationHelperBackground.dart::NotificationHelperBackground" o-- "flutter_local_notifications::src::platform_specifics::ios::notification_details.dart::IOSNotificationDetails"
+"Locato::Background::NotificationHelperBackground.dart::NotificationHelperBackground" o-- "flutter_local_notifications::src::notification_details.dart::NotificationDetails"
+
+@enduml

@@ -1,0 +1,98 @@
+@startuml
+set namespaceSeparator ::
+class "Locato::DatabaseHelper.dart::DatabaseHelper" {
+  {static} -String _databaseName
+  {static} -int _databaseVersion
+  {static} +int index
+  {static} +DatabaseHelper instance
+  {static} -Database _database
+  +Future<Database> database
+  -dynamic _initDatabase()
+  -Future _onCreate()
+  +Future insert()
+  +Future queryAllRows()
+  +Future queryIdRowsTask()
+  +Future queryEventWeekend()
+  +Future queryEventDay()
+  +Future queryTaskNotifiId()
+  +Future showalltables()
+  +Future query()
+  +Future update()
+  +Future delete()
+}
+
+"Locato::DatabaseHelper.dart::DatabaseHelper" o-- "Locato::DatabaseHelper.dart::DatabaseHelper"
+"Locato::DatabaseHelper.dart::DatabaseHelper" o-- "sqflite_common::sqlite_api.dart::Database"
+
+class "Locato::DatabaseHelper.dart::EventHelper" {
+  {static} +DatabaseHelper dbHelper
+  {static} +Future add()
+  {static} +Future update()
+  {static} +Future delete()
+  {static} +Future lists()
+  {static} +Future listsDay()
+}
+
+"Locato::DatabaseHelper.dart::EventHelper" o-- "Locato::DatabaseHelper.dart::DatabaseHelper"
+
+class "Locato::DatabaseHelper.dart::GroupHelper" {
+  {static} +DatabaseHelper dbHelper
+  {static} +Future add()
+  {static} +Future addlist()
+  {static} +Future update()
+  {static} +Future delete()
+  {static} +Future deleteAndReplaceIdTask()
+  {static} +Future getPercent()
+  {static} +Future lists()
+}
+
+"Locato::DatabaseHelper.dart::GroupHelper" o-- "Locato::DatabaseHelper.dart::DatabaseHelper"
+
+class "Locato::DatabaseHelper.dart::LocalizationHelper" {
+  {static} +DatabaseHelper dbHelper
+  {static} +Future add()
+  {static} +Future addlist()
+  {static} +Future updateStatus()
+  {static} +Future update()
+  {static} +Future delete()
+  {static} +Future deleteAndReplaceIdTask()
+  {static} +Future lists()
+  {static} +Future resetAllStatus()
+}
+
+"Locato::DatabaseHelper.dart::LocalizationHelper" o-- "Locato::DatabaseHelper.dart::DatabaseHelper"
+
+class "Locato::DatabaseHelper.dart::NotifiHelper" {
+  {static} +DatabaseHelper dbHelper
+  {static} +Future add()
+  {static} +Future addListNotifiTask()
+  {static} +Future addListNotifiEvent()
+  {static} +Future update()
+  {static} +Future delete()
+  {static} +Future deleteTask()
+  {static} +Future deleteTaskID()
+  {static} +Future deleteEventID()
+  {static} +Future lists()
+  {static} +Future listsTaskID()
+  {static} +Future listsEventID()
+  {static} -Duration _parseDuration()
+}
+
+"Locato::DatabaseHelper.dart::NotifiHelper" o-- "Locato::DatabaseHelper.dart::DatabaseHelper"
+
+class "Locato::DatabaseHelper.dart::TaskHelper" {
+  {static} +DatabaseHelper dbHelper
+  {static} +Future add()
+  {static} +Future updateDone()
+  {static} +Future update()
+  {static} +Future delete()
+  {static} +Future deleteDoneTaskToday()
+  {static} +Future lists()
+  {static} +Future listsID()
+  {static} +Future listsIDLocal()
+}
+
+"Locato::DatabaseHelper.dart::TaskHelper" o-- "Locato::DatabaseHelper.dart::DatabaseHelper"
+
+
+@enduml

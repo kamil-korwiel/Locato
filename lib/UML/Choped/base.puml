@@ -1,0 +1,55 @@
+@startuml
+set namespaceSeparator ::
+
+class "Locato::MainClasses.dart::Event" #DeepSkyBlue{
+  +int id
+  +String name
+  +DateTime beginTime
+  +DateTime endTime
+  +String cycle
+  +String color
+  +String description
+  +List<Notifi> listNotifi
+}
+
+class "Locato::MainClasses.dart::Group" {
+  +int id
+  +String name
+  +int howMuchDone
+  +bool isSelected
+}
+
+class "Locato::MainClasses.dart::Localization" #YellowGreen{
+  +int id
+  +double latitude
+  +double longitude
+  +String name
+  +String city
+  +String street
+  +bool isNearBy
+  +bool wasNotified
+  +bool isSelected
+}
+
+class "Locato::MainClasses.dart::Notifi" {
+  +int id
+  +int idTask
+  +int idEvent
+  +Duration duration
+}
+
+class "Locato::MainClasses.dart::Task" {
+  +int id
+  +String name
+  +bool done
+  +DateTime endTime
+  +String description
+  +Localization localization
+  +Group group
+  +List<Notifi> listNotifi
+}
+
+"Locato::MainClasses.dart::Task" o-[#YellowGreen]- "Locato::MainClasses.dart::Localization"
+"Locato::MainClasses.dart::Task" o-- "Locato::MainClasses.dart::Group"
+
+@enduml

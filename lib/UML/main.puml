@@ -1,0 +1,37 @@
+@startuml
+set namespaceSeparator ::
+
+class "flutter::src::widgets::framework.dart::StatefulWidget" #Green
+class "flutter::src::widgets::framework.dart::State<StatefulWidget>" #MediumSpringGreen
+class "flutter::src::widgets::framework.dart::GlobalKey<FormState>" #DarkRed
+class "flutter::src::widgets::framework.dart::State<T>" #SteelBlue
+class "flutter::src::widgets::framework.dart::StatelessWidget" #Tomato
+
+class "Locato::main.dart::MyApp" {
+  +Widget build()
+}
+
+"flutter::src::widgets::framework.dart::StatelessWidget" <|-[#Tomato]- "Locato::main.dart::MyApp"
+
+class "Locato::main.dart::HomePage" {
+  +_HomePageState createState()
+}
+
+"flutter::src::widgets::framework.dart::StatefulWidget" <|-[#Green]- "Locato::main.dart::HomePage"
+
+class "Locato::main.dart::_HomePageState" {
+  -TabController _tabController
+  -PageController _pageController
+  +bool pageCanChange
+  +void initState()
+  +Widget build()
+  +dynamic onPageChange()
+}
+
+"Locato::main.dart::_HomePageState" o-- "flutter::src::material::tab_controller.dart::TabController"
+"Locato::main.dart::_HomePageState" o-- "flutter::src::widgets::page_view.dart::PageController"
+"flutter::src::widgets::framework.dart::State<T>" <|-[#SteelBlue]- "Locato::main.dart::_HomePageState"
+"flutter::src::widgets::ticker_provider.dart::SingleTickerProviderStateMixin<T>" <|-- "Locato::main.dart::_HomePageState"
+
+
+@enduml

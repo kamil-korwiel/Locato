@@ -1,0 +1,14 @@
+Locato jest to aplikacja mobilna do zarządzania zadaniami i wydarzeniami w twoim życiu.
+
+Copyright (C) 2019 Kamil Korwiel, Dariusz Puta, Filip Kowalski, Sara Ignaczek, Adrian Kołodziejski
+
+Niniejszy program jest wolnym oprogramowaniem - możesz go rozpowszechniać dalej i/lub modyfikować
+na warunkach Powszechnej Licencji Publicznej GNU wydanej przez Fundację Wolnego Oprogramowania,
+według wersji 3 tej Licencji lub dowolnej z późniejszych wersji.
+
+Niniejszy program rozpowszechniany jest z nadzieją, iż będzie on użyteczny,
+jednak BEZ ŻADNEJ GWARANCJI, nawet domyślnej gwarancji
+PRZYDATNOŚCI HANDLOWEJ albo PRZYDATNOŚCI DO OKREŚLONYCH ZASTOSOWAŃ.
+Bliższe informacje na ten temat można uzyskać z Powszechnej Licencji Publicznej GNU.
+Kopia Powszechnej Licencji Publicznej GNU powinna zostać ci dostarczona razem z tym programem.
+Jeżeli nie została dostarczona, odwiedź <http://www.gnu.org/licenses/>.

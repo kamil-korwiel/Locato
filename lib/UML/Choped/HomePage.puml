@@ -1,0 +1,82 @@
+@startuml
+set namespaceSeparator ::
+class "flutter::src::widgets::framework.dart::StatefulWidget" #Green
+class "flutter::src::widgets::framework.dart::State<StatefulWidget>" #MediumSpringGreen
+class "flutter::src::widgets::framework.dart::GlobalKey<FormState>" #DarkRed
+class "flutter::src::widgets::framework.dart::State<T>" #SteelBlue
+class "flutter::src::widgets::framework.dart::StatelessWidget" #Tomato
+
+class "Locato::Pages::HomePage.dart::HomePageEvents" {
+  +_HomePageEventsState createState()
+}
+
+"flutter::src::widgets::framework.dart::StatefulWidget" <|-[#Green]- "Locato::Pages::HomePage.dart::HomePageEvents"
+
+class "Locato::Pages::HomePage.dart::_HomePageEventsState" {
+  {static} +List<String> listOfDays
+  +int day
+  +List<Event> list
+  +double heightExtededAppBar
+  +double heightImportantEvent
+  +double widthImportantEvent
+  -DateTime _date
+  +void initState()
+  +String getDay()
+  +Widget build()
+  +dynamic refresh()
+}
+
+"flutter::src::widgets::framework.dart::State<T>" <|-[#SteelBlue]- "Locato::Pages::HomePage.dart::_HomePageEventsState"
+
+class "Locato::Pages::HomePage.dart::EventCard" {
+  +String day
+  +List<Event> events
+  +Widget build()
+  -Widget _buildContent()
+}
+
+"flutter::src::widgets::framework.dart::StatelessWidget" <|-[#Tomato]- "Locato::Pages::HomePage.dart::EventCard"
+
+class "Locato::Pages::HomePage.dart::EventCardEvents" {
+  +List<Event> events
+  +_EventCardEventsState createState()
+}
+
+"flutter::src::widgets::framework.dart::StatefulWidget" <|-[#Green]- "Locato::Pages::HomePage.dart::EventCardEvents"
+
+class "Locato::Pages::HomePage.dart::_EventCardEventsState" {
+  +Widget build()
+}
+
+"flutter::src::widgets::framework.dart::State<T>" <|-[#SteelBlue]- "Locato::Pages::HomePage.dart::_EventCardEventsState"
+
+class "Locato::Pages::HomePage.dart::EventCardHeader" {
+  +String day
+  +Widget build()
+}
+
+"flutter::src::widgets::framework.dart::StatelessWidget" <|-[#Tomato]- "Locato::Pages::HomePage.dart::EventCardHeader"
+
+class "Locato::Pages::HomePage.dart::EventCardItem" {
+  +String name
+  +String eventStart
+  +String eventEnd
+  +String cycle
+  +bool is_cyclic
+  +String description
+  +Color color
+  +Function onPressedEdit
+  +Function onPressedDelete
+  +_EventCardItemState createState()
+}
+
+"flutter::src::widgets::framework.dart::StatefulWidget" <|-[#Green]- "Locato::Pages::HomePage.dart::EventCardItem"
+
+class "Locato::Pages::HomePage.dart::_EventCardItemState" {
+  +Widget build()
+}
+
+"flutter::src::widgets::framework.dart::State<T>" <|-[#SteelBlue]- "Locato::Pages::HomePage.dart::_EventCardItemState"
+
+
+@enduml

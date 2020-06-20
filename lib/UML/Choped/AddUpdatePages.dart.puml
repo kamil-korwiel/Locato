@@ -1,0 +1,476 @@
+@startuml
+set namespaceSeparator ::
+
+class "flutter::src::widgets::framework.dart::StatefulWidget" #Green
+class "flutter::src::widgets::framework.dart::State<StatefulWidget>" #MediumSpringGreen
+class "flutter::src::widgets::framework.dart::GlobalKey<FormState>" #DarkRed
+class "flutter::src::widgets::framework.dart::State<T>" #SteelBlue
+class "flutter::src::widgets::framework.dart::StatelessWidget" #Tomato
+
+class "Locato::MainClasses.dart::Event" #DeepSkyBlue{
+  +int id
+  +String name
+  +DateTime beginTime
+  +DateTime endTime
+  +String cycle
+  +String color
+  +String description
+  +List<Notifi> listNotifi
+}
+
+class "Locato::MainClasses.dart::Group" {
+  +int id
+  +String name
+  +int howMuchDone
+  +bool isSelected
+}
+
+class "Locato::MainClasses.dart::Localization" #YellowGreen{
+  +int id
+  +double latitude
+  +double longitude
+  +String name
+  +String city
+  +String street
+  +bool isNearBy
+  +bool wasNotified
+  +bool isSelected
+}
+
+class "Locato::MainClasses.dart::Notifi" {
+  +int id
+  +int idTask
+  +int idEvent
+  +Duration duration
+}
+
+class "Locato::MainClasses.dart::Task" {
+  +int id
+  +String name
+  +bool done
+  +DateTime endTime
+  +String description
+  +Localization localization
+  +Group group
+  +List<Notifi> listNotifi
+}
+
+"Locato::MainClasses.dart::Task" o-[#YellowGreen]- "Locato::MainClasses.dart::Localization"
+"Locato::MainClasses.dart::Task" o-- "Locato::MainClasses.dart::Group"
+
+class "Locato::Pages::AddUpdatePages.dart::AddEvent" {
+  +State<StatefulWidget> addEventState
+  +AddEventState createState()
+}
+
+"Locato::Pages::AddUpdatePages.dart::AddEvent" o-[#MediumSpringGreen]- "flutter::src::widgets::framework.dart::State<StatefulWidget>"
+"flutter::src::widgets::framework.dart::StatefulWidget" <|-[#Green]- "Locato::Pages::AddUpdatePages.dart::AddEvent"
+
+class "Locato::Pages::AddUpdatePages.dart::AddEventState" {
+  -TextEditingController _controllerName
+  -TextEditingController _controllerDesc
+  -GlobalKey<FormState> _formKey
+  -DateTime _today
+  -DateTime _date
+  -DateTime _time1
+  -DateTime _time2
+  -Color _dateColor
+  -Color _time1Color
+  -Color _time2Color
+  -Event _event
+  +bool isDateSelected
+  +bool isTime1Selected
+  +bool isTime2Selected
+  +void initState()
+  +Widget build()
+  +Widget buildCustomTextFieldwithValidation()
+  +Widget buildCustomTextField()
+  +Widget buildSpace()
+  +Widget buildCustomButtonWithValidation()
+  +Widget buildCustomButton()
+  +Widget buildButtonBar()
+  +Widget buildButtonBarTile()
+  +Widget buildClearButton()
+  +void clearDate()
+  +void clearTime1()
+  +void clearTime2()
+  +void clearNotifiList()
+  +void datePick()
+  +void startTimePick()
+  +void endTimePick()
+  +void goBack()
+  +void goToNotificationPickPage()
+  +void acceptAndValidate()
+}
+
+"Locato::Pages::AddUpdatePages.dart::AddEventState" o-- "flutter::src::widgets::editable_text.dart::TextEditingController"
+"Locato::Pages::AddUpdatePages.dart::AddEventState" o-[#DarkRed]- "flutter::src::widgets::framework.dart::GlobalKey<FormState>"
+"Locato::Pages::AddUpdatePages.dart::AddEventState" o-right[#DeepSkyBlue]- "Locato::MainClasses.dart::Event"
+"flutter::src::widgets::framework.dart::State<T>" <|-[#SteelBlue]- "Locato::Pages::AddUpdatePages.dart::AddEventState"
+
+class "Locato::Pages::AddUpdatePages.dart::AddGroup" {
+  +Task task
+  +List<Group> listOfGroup
+  +State<StatefulWidget> stateOfParent
+  +_AddGroupState createState()
+}
+
+"Locato::Pages::AddUpdatePages.dart::AddGroup" o-- "Locato::MainClasses.dart::Task"
+"Locato::Pages::AddUpdatePages.dart::AddGroup" o-[#MediumSpringGreen]- "flutter::src::widgets::framework.dart::State<StatefulWidget>"
+"flutter::src::widgets::framework.dart::StatefulWidget" <|-[#Green]- "Locato::Pages::AddUpdatePages.dart::AddGroup"
+
+class "Locato::Pages::AddUpdatePages.dart::_AddGroupState" {
+  -GlobalKey<FormState> _formKey
+  -TextEditingController _text
+  +List<Group> downloadlist
+  +List<Group> list
+  +void initState()
+  -void _downloadData()
+  +Widget build()
+  +Widget buildListTileWithText()
+  +Widget buildCustomTextFieldwithValidation()
+  +Widget buildRemoveButton()
+  +Widget buildCustomButton()
+  +Widget buildSpace()
+  +void goBack()
+  +void add()
+  +void removeFromList()
+  +void select()
+}
+
+"Locato::Pages::AddUpdatePages.dart::_AddGroupState" o-[#DarkRed]- "flutter::src::widgets::framework.dart::GlobalKey<FormState>"
+"Locato::Pages::AddUpdatePages.dart::_AddGroupState" o-- "flutter::src::widgets::editable_text.dart::TextEditingController"
+"flutter::src::widgets::framework.dart::State<T>" <|-[#SteelBlue]- "Locato::Pages::AddUpdatePages.dart::_AddGroupState"
+
+class "Locato::Pages::AddUpdatePages.dart::AddLocalization" {
+  +Task task
+  +State<StatefulWidget> stateOfParent
+  +State<StatefulWidget> addLocalizationState
+  +List<Localization> listOfLocal
+  +_AddLocalizationState createState()
+}
+
+"Locato::Pages::AddUpdatePages.dart::AddLocalization" o-- "Locato::MainClasses.dart::Task"
+"Locato::Pages::AddUpdatePages.dart::AddLocalization" o-[#MediumSpringGreen]- "flutter::src::widgets::framework.dart::State<StatefulWidget>"
+"flutter::src::widgets::framework.dart::StatefulWidget" <|-[#Green]- "Locato::Pages::AddUpdatePages.dart::AddLocalization"
+
+class "Locato::Pages::AddUpdatePages.dart::_AddLocalizationState" {
+  +List<Localization> localizationlist
+  +List<Localization> downloadlist
+  +void initState()
+  -void _downloadData()
+  +Widget build()
+  +Widget buildList()
+  +Widget buildRemoveButton()
+  +Widget buildCustomButton()
+  +Widget buildSpace()
+  +void goBack()
+  +void goToLocationPickPage()
+  +void removeFromList()
+  +void checkifselected()
+}
+
+"flutter::src::widgets::framework.dart::State<T>" <|-[#SteelBlue]- "Locato::Pages::AddUpdatePages.dart::_AddLocalizationState"
+
+class "Locato::Pages::AddUpdatePages.dart::Adres" {
+  +String ulica
+  +String numerDomu
+  +String miasto
+  +int odleglosc
+  +String toString()
+}
+
+class "Locato::Pages::AddUpdatePages.dart::AddLocation" {
+  +List<Localization> listofLocal
+  +State<StatefulWidget> stateOfParent
+  +_AddLocationState createState()
+}
+
+"Locato::Pages::AddUpdatePages.dart::AddLocation" o-[#MediumSpringGreen]- "flutter::src::widgets::framework.dart::State<StatefulWidget>"
+"flutter::src::widgets::framework.dart::StatefulWidget" <|-[#Green]- "Locato::Pages::AddUpdatePages.dart::AddLocation"
+
+class "Locato::Pages::AddUpdatePages.dart::_AddLocationState" {
+  +Completer<GoogleMapController> mapController
+  +Future<List<Adres>> futureAdresy
+  +TextEditingController adresController
+  +TextEditingController nazwaController
+  +Throttling thrTxt
+  {static} -LatLng _initialPosition
+  {static} -LatLng _lastPosition
+  +Localization dbLokalizacja
+  -GlobalKey<FormState> _formKey
+  -dynamic _onMapCreated()
+  -dynamic _onCameraMove()
+  +void initState()
+  -InputDecoration _buildInputDecoration()
+  -InputDecoration _buildInputDecoration2()
+  -void _getLocation()
+  +void locationToAddress()
+  +Future addressToLocation()
+  +Widget build()
+  -Widget _buildNazwaLokalizacji()
+  -Widget _buildAdres()
+  -Widget _buildMapa()
+  -Widget _buildDodaj()
+}
+
+"Locato::Pages::AddUpdatePages.dart::_AddLocationState" o-- "dart::async::Completer<GoogleMapController>"
+"Locato::Pages::AddUpdatePages.dart::_AddLocationState" o-- "flutter::src::widgets::editable_text.dart::TextEditingController"
+"Locato::Pages::AddUpdatePages.dart::_AddLocationState" o-- "throttling::src::throttle.dart::Throttling"
+"Locato::Pages::AddUpdatePages.dart::_AddLocationState" o-- "google_maps_flutter_platform_interface::src::types::location.dart::LatLng"
+"Locato::Pages::AddUpdatePages.dart::_AddLocationState" o-[#YellowGreen]- "Locato::MainClasses.dart::Localization"
+"Locato::Pages::AddUpdatePages.dart::_AddLocationState" o-[#DarkRed]- "flutter::src::widgets::framework.dart::GlobalKey<FormState>"
+"flutter::src::widgets::framework.dart::State<T>" <|-[#SteelBlue]- "Locato::Pages::AddUpdatePages.dart::_AddLocationState"
+
+class "Locato::Pages::AddUpdatePages.dart::AddNotificationTask" {
+  +Task task
+  +State<StatefulWidget> stateOfParent
+  +_AddNotificationTaskState createState()
+}
+
+"Locato::Pages::AddUpdatePages.dart::AddNotificationTask" o-- "Locato::MainClasses.dart::Task"
+"Locato::Pages::AddUpdatePages.dart::AddNotificationTask" o-[#MediumSpringGreen]- "flutter::src::widgets::framework.dart::State<StatefulWidget>"
+"flutter::src::widgets::framework.dart::StatefulWidget" <|-[#Green]- "Locato::Pages::AddUpdatePages.dart::AddNotificationTask"
+
+class "Locato::Pages::AddUpdatePages.dart::_AddNotificationTaskState" {
+  -TextEditingController _text
+  -GlobalKey<FormState> _formKey
+  -List<Notifi> _notifilist
+  +dynamic duration
+  +int minuty
+  +int godziny
+  +int dni
+  +String name
+  +void initState()
+  +Widget build()
+  +Widget buildPickerNameTile()
+  +Widget buildNumberPicker1()
+  +Widget buildNumberPicker2()
+  +Widget buildNumberPicker3()
+  +Widget buildCustomButton()
+  +Widget buildSpace()
+  +Widget buildCustomTextFieldwithValidation()
+  +void validateAndAdd()
+  +void goBack()
+  +void confirm()
+}
+
+"Locato::Pages::AddUpdatePages.dart::_AddNotificationTaskState" o-- "flutter::src::widgets::editable_text.dart::TextEditingController"
+"Locato::Pages::AddUpdatePages.dart::_AddNotificationTaskState" o-[#DarkRed]- "flutter::src::widgets::framework.dart::GlobalKey<FormState>"
+"flutter::src::widgets::framework.dart::State<T>" <|-[#SteelBlue]- "Locato::Pages::AddUpdatePages.dart::_AddNotificationTaskState"
+
+class "Locato::Pages::AddUpdatePages.dart::AddNotificationEvent" {
+  +Event event
+  +State<StatefulWidget> stateOfParent
+  +_AddNotificationEventState createState()
+}
+
+"Locato::Pages::AddUpdatePages.dart::AddNotificationEvent" o-right[#DeepSkyBlue]- "Locato::MainClasses.dart::Event"
+"Locato::Pages::AddUpdatePages.dart::AddNotificationEvent" o-[#MediumSpringGreen]- "flutter::src::widgets::framework.dart::State<StatefulWidget>"
+"flutter::src::widgets::framework.dart::StatefulWidget" <|-[#Green]- "Locato::Pages::AddUpdatePages.dart::AddNotificationEvent"
+
+class "Locato::Pages::AddUpdatePages.dart::_AddNotificationEventState" {
+  -TextEditingController _text
+  -GlobalKey<FormState> _formKey
+  -List<Notifi> _notifilist
+  +dynamic duration
+  +int minuty
+  +int godziny
+  +int dni
+  +String name
+  +void initState()
+  +Widget build()
+  +Widget buildPickerNameTile()
+  +Widget buildNumberPicker1()
+  +Widget buildNumberPicker2()
+  +Widget buildNumberPicker3()
+  +Widget buildCustomButton()
+  +Widget buildSpace()
+  +Widget buildCustomTextFieldwithValidation()
+  +void validateAndAdd()
+  +void goBack()
+  +void confirm()
+}
+
+"Locato::Pages::AddUpdatePages.dart::_AddNotificationEventState" o-- "flutter::src::widgets::editable_text.dart::TextEditingController"
+"Locato::Pages::AddUpdatePages.dart::_AddNotificationEventState" o-[#DarkRed]- "flutter::src::widgets::framework.dart::GlobalKey<FormState>"
+"flutter::src::widgets::framework.dart::State<T>" <|-[#SteelBlue]- "Locato::Pages::AddUpdatePages.dart::_AddNotificationEventState"
+
+class "Locato::Pages::AddUpdatePages.dart::AddTask" {
+  +_AddTaskState createState()
+}
+
+"flutter::src::widgets::framework.dart::StatefulWidget" <|-[#Green]- "Locato::Pages::AddUpdatePages.dart::AddTask"
+
+class "Locato::Pages::AddUpdatePages.dart::_AddTaskState" {
+  -GlobalKey<FormState> _formKey
+  -TextEditingController _controllerName
+  +TextEditingController controllerDesc
+  +Color dateColor
+  +Color timeColor
+  +bool isNotificationEnabled
+  +bool isTimeSelected
+  +bool isDateSelected
+  +bool isLocalizationSelected
+  -DateTime _terminData
+  -DateTime _terminCzas
+  -DateTime _today
+  -Task _task
+  +List<Localization> listOfLocalization
+  +List<Group> listOfGroup
+  +void initState()
+  +Widget build()
+  +Widget buildButtonBar()
+  +Widget buildCustomTextFieldwithValidation()
+  +Widget buildClearButton()
+  +Widget buildNotifiListClearButton()
+  +Widget buildCustomTextField()
+  +Widget buildSpace()
+  +Widget buildCustomButtonWithValidation()
+  +Widget buildCustomButton()
+  +Widget buildCustomNotificationButton()
+  +Widget buildButtonBarTile()
+  +void clearDate()
+  +void clearTime()
+  +void clearLocalization()
+  +void clearGroup()
+  +void clearNotifiList()
+  +void datePick()
+  +void timePick()
+  +void goBack()
+  +void goToNotificationPickPage()
+  +void goToLocalizationPickPage()
+  +void goToGroupPickPage()
+  +void acceptAndValidate()
+}
+
+"Locato::Pages::AddUpdatePages.dart::_AddTaskState" o-[#DarkRed]- "flutter::src::widgets::framework.dart::GlobalKey<FormState>"
+"Locato::Pages::AddUpdatePages.dart::_AddTaskState" o-- "flutter::src::widgets::editable_text.dart::TextEditingController"
+"Locato::Pages::AddUpdatePages.dart::_AddTaskState" o-- "Locato::MainClasses.dart::Task"
+"flutter::src::widgets::framework.dart::State<T>" <|-[#SteelBlue]- "Locato::Pages::AddUpdatePages.dart::_AddTaskState"
+
+class "Locato::Pages::AddUpdatePages.dart::ListNotifi" {
+  +List<Notifi> lista
+  +_ListNotifiState createState()
+}
+
+"flutter::src::widgets::framework.dart::StatefulWidget" <|-[#Green]- "Locato::Pages::AddUpdatePages.dart::ListNotifi"
+
+class "Locato::Pages::AddUpdatePages.dart::_ListNotifiState" {
+  +void initState()
+  +Widget build()
+  +Widget buildSpace()
+  +Widget buildSpaceBetween()
+  +Widget buildListTextTile()
+  +Widget buildRemoveButton()
+  +Widget buildListIconTile()
+  +void removeFromList()
+}
+
+"flutter::src::widgets::framework.dart::State<T>" <|-[#SteelBlue]- "Locato::Pages::AddUpdatePages.dart::_ListNotifiState"
+
+class "Locato::Pages::AddUpdatePages.dart::UpdateEvent" {
+  +Event event
+  +State<StatefulWidget> updateEventState
+  +_UpdateEventState createState()
+}
+
+"Locato::Pages::AddUpdatePages.dart::UpdateEvent" o-right[#DeepSkyBlue]- "Locato::MainClasses.dart::Event"
+"Locato::Pages::AddUpdatePages.dart::UpdateEvent" o-[#MediumSpringGreen]- "flutter::src::widgets::framework.dart::State<StatefulWidget>"
+"flutter::src::widgets::framework.dart::StatefulWidget" <|-[#Green]- "Locato::Pages::AddUpdatePages.dart::UpdateEvent"
+
+class "Locato::Pages::AddUpdatePages.dart::_UpdateEventState" {
+  -TextEditingController _controllerName
+  -TextEditingController _controllerDesc
+  -String _name
+  -String _description
+  -String _date
+  -String _time1
+  -String _time2
+  -String _notification
+  -DateTime _start
+  -DateTime _end
+  -Color _dateColor
+  -Color _time1Color
+  -Color _time2Color
+  +void initState()
+  -void _downloadData()
+  +Widget build()
+  +Widget buildCustomTextFieldwithValidation()
+  +Widget buildCustomTextField()
+  +Widget buildSpace()
+  +Widget buildCustomButtonWithValidation()
+  +Widget buildCustomButton()
+  +Widget buildButtonBarTile()
+  +void datePick()
+  +void startTimePick()
+  +void endTimePick()
+  +void goBack()
+  +void goToNotificationPickPage()
+  +void acceptAndValidate()
+}
+
+"Locato::Pages::AddUpdatePages.dart::_UpdateEventState" o-- "flutter::src::widgets::editable_text.dart::TextEditingController"
+
+"flutter::src::widgets::framework.dart::State<T>" <|-[#SteelBlue]- "Locato::Pages::AddUpdatePages.dart::_UpdateEventState"
+
+class "Locato::Pages::AddUpdatePages.dart::UpdateTask" {
+  +State<StatefulWidget> updateTaskState
+  +Task task
+  +_UpdateTaskState createState()
+}
+
+"Locato::Pages::AddUpdatePages.dart::UpdateTask" o-[#MediumSpringGreen]- "flutter::src::widgets::framework.dart::State<StatefulWidget>"
+"Locato::Pages::AddUpdatePages.dart::UpdateTask" o-- "Locato::MainClasses.dart::Task"
+"flutter::src::widgets::framework.dart::StatefulWidget" <|-[#Green]- "Locato::Pages::AddUpdatePages.dart::UpdateTask"
+
+class "Locato::Pages::AddUpdatePages.dart::_UpdateTaskState" {
+  -GlobalKey<FormState> _formKey
+  -TextEditingController _controllerName
+  +TextEditingController controllerDesc
+  +int id
+  +Color dateColor
+  +Color timeColor
+  +bool isNotificationEnabled
+  +bool isTimeSelected
+  +bool isDateSelected
+  +bool isLocalizationSelected
+  -DateTime _terminData
+  -DateTime _terminCzas
+  +List<Localization> listOfLocalization
+  +List<Group> listOfGroup
+  +void initState()
+  -void _downloadData()
+  +Widget build()
+  +Widget buildCustomTextFieldwithValidation()
+  +Widget buildClearButton()
+  +Widget buildNotifiListClearButton()
+  +Widget buildCustomTextField()
+  +Widget buildSpace()
+  +Widget buildCustomButtonWithValidation()
+  +Widget buildCustomButton()
+  +Widget buildCustomNotificationButton()
+  +Widget buildButtonBarTile()
+  +void clearDate()
+  +void clearTime()
+  +void clearLocalization()
+  +void clearGroup()
+  +void clearNotifiList()
+  +void datePick()
+  +void timePick()
+  +void goBack()
+  +void goToNotificationPickPage()
+  +void goToLocalizationPickPage()
+  +void goToGroupPickPage()
+  +void acceptAndValidate()
+  +void onBackPressed()
+  +void selectedGroup()
+}
+
+"Locato::Pages::AddUpdatePages.dart::_UpdateTaskState" o-[#DarkRed]- "flutter::src::widgets::framework.dart::GlobalKey<FormState>"
+"Locato::Pages::AddUpdatePages.dart::_UpdateTaskState" o-- "flutter::src::widgets::editable_text.dart::TextEditingController"
+
+
+
+
+@enduml
